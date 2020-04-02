@@ -11,13 +11,13 @@ export default {
     sourcemap: true,
     format: 'iife',
     name: 'app',
-    file: 'assets/photo-viewer/bundle.js'
+    file: 'assets/photo-viewer.js'
   },
   plugins: [
     svelte({
       dev: !production,
       css: css => {
-        css.write('assets/photo-viewer/bundle.css')
+        css.write('assets/photo-viewer.css')
       }
     }),
 
