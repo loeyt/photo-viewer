@@ -1,3 +1,9 @@
+<script context="module">
+  if (history.scrollRestoration) {
+    history.scrollRestoration = "manual";
+  }
+</script>
+
 <script>
   import { fade } from "svelte/transition";
 
