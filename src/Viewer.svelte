@@ -27,7 +27,7 @@
 
 <style>
   div {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     background-color: rgba(255, 255, 255, 0.5);
