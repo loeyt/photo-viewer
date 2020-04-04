@@ -22,9 +22,9 @@
           event.preventDefault();
           if (window.location.hash) {
             // Navigation from image to image is not preserved in history.
-            history.replaceState({}, "", href);
+            history.replaceState({ back: true }, "", href);
           } else {
-            history.pushState({}, "", href);
+            history.pushState({ back: true }, "", href);
           }
           // These history invocations don't trigger hashchange, so we do here.
           selected = window.location.hash;
@@ -39,7 +39,12 @@
   function keydown(event) {
     if (event.key == "Escape") {
       if (window.location.hash) {
-        history.back();
+        if (history.state && history.state.back) {
+          history.back();
+        } else {
+          history.replaceState({ back: true }, "", window.location.pathname);
+          selected = "";
+        }
       }
     }
 
