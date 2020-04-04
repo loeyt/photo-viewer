@@ -1,10 +1,13 @@
-import App from './App.svelte';
+import Viewer from './Viewer.svelte'
 
-const app = new App({
-	target: document.body,
-	props: {
-		name: 'world'
-	}
-});
+const viewer = new Viewer({
+  target: document.body,
+  props: {
+    dataURL: document
+      .querySelector('script[data-photo-viewer]')
+      .getAttribute('data-photo-viewer')
+  },
+  intro: true
+})
 
-export default app;
+export default viewer

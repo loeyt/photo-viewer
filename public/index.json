@@ -1,0 +1,47 @@
+{
+    "#ffffff_185282": {
+        "1200x800": "images/dummy_1200x800_ffffff_185282.png",
+        "1440x960": "images/dummy_1440x960_ffffff_185282.png",
+        "1600x1067": "images/dummy_1600x1067_ffffff_185282.png",
+        "1920x1280": "images/dummy_1920x1280_ffffff_185282.png",
+        "600x400": "images/dummy_600x400_ffffff_185282.png",
+        "800x533": "images/dummy_800x533_ffffff_185282.png",
+        "960x640": "images/dummy_960x640_ffffff_185282.png"
+    },
+    "#000000_78ea6e": {
+        "1200x800": "images/dummy_1200x800_000000_78ea6e.png",
+        "1440x960": "images/dummy_1440x960_000000_78ea6e.png",
+        "1600x1067": "images/dummy_1600x1067_000000_78ea6e.png",
+        "1920x1280": "images/dummy_1920x1280_000000_78ea6e.png",
+        "600x400": "images/dummy_600x400_000000_78ea6e.png",
+        "800x533": "images/dummy_800x533_000000_78ea6e.png",
+        "960x640": "images/dummy_960x640_000000_78ea6e.png"
+    },
+    "#000000_99ffa1": {
+        "1200x800": "images/dummy_1200x800_000000_99ffa1.png",
+        "1440x960": "images/dummy_1440x960_000000_99ffa1.png",
+        "1600x1067": "images/dummy_1600x1067_000000_99ffa1.png",
+        "1920x1280": "images/dummy_1920x1280_000000_99ffa1.png",
+        "600x400": "images/dummy_600x400_000000_99ffa1.png",
+        "800x533": "images/dummy_800x533_000000_99ffa1.png",
+        "960x640": "images/dummy_960x640_000000_99ffa1.png"
+    },
+    "#000000_d36388": {
+        "1200x800": "images/dummy_1200x800_000000_d36388.png",
+        "1440x960": "images/dummy_1440x960_000000_d36388.png",
+        "1600x1067": "images/dummy_1600x1067_000000_d36388.png",
+        "1920x1280": "images/dummy_1920x1280_000000_d36388.png",
+        "600x400": "images/dummy_600x400_000000_d36388.png",
+        "800x533": "images/dummy_800x533_000000_d36388.png",
+        "960x640": "images/dummy_960x640_000000_d36388.png"
+    },
+    "#000000_ffddad": {
+        "1200x800": "images/dummy_1200x800_000000_ffddad.png",
+        "1440x960": "images/dummy_1440x960_000000_ffddad.png",
+        "1600x1067": "images/dummy_1600x1067_000000_ffddad.png",
+        "1920x1280": "images/dummy_1920x1280_000000_ffddad.png",
+        "600x400": "images/dummy_600x400_000000_ffddad.png",
+        "800x533": "images/dummy_800x533_000000_ffddad.png",
+        "960x640": "images/dummy_960x640_000000_ffddad.png"
+    }
+}
