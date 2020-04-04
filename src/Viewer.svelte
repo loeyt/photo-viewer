@@ -8,11 +8,10 @@
 
   let selected = window.location.hash;
 
-  let current;
-
   function keydown(event) {
     if (event.key == "Escape") {
-      window.location.hash = "";
+      history.replaceState({}, "", window.location.pathname);
+      hashchange();
     }
 
     // TODO: ArrowLeft + ArrowDown for previous
@@ -45,10 +44,12 @@
 
 {#if selected}
   {#await imageData then data}
-    <div transition:fade>
-      <div class="current">
-        <Image alt={selected} data={data[selected]} />
+    {#if data[selected]}
+      <div transition:fade>
+        <div class="current">
+          <Image alt={selected} data={data[selected]} />
+        </div>
       </div>
-    </div>
+    {/if}
   {/await}
 {/if}
