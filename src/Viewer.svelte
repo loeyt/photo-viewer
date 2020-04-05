@@ -120,7 +120,7 @@
 </script>
 
 <style>
-  div {
+  .background {
     position: fixed;
     left: 0;
     top: 0;
@@ -136,6 +136,52 @@
   :global(body.photo-viewer) {
     overflow: hidden;
   }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 40%;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .prev {
+    left: 0;
+  }
+
+  .next {
+    right: 0;
+  }
+
+  .overlay span {
+    font-size: 32px;
+    position: absolute;
+    top: 50%;
+    width: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+  }
+
+  .prev span {
+    left: 1%;
+  }
+
+  .prev:hover span {
+    border-right: 12px solid white;
+  }
+
+  .next span {
+    right: 1%;
+  }
+
+  .next:hover span {
+    border-left: 12px solid white;
+  }
+
+  .image {
+    position: relative;
+  }
 </style>
 
 <svelte:window
@@ -145,8 +191,20 @@
 
 {#if selected}
   {#await imageData then data}
-    <div bind:this={background} on:click={click} transition:fade>
-      <Image alt={selected} data={data[selected]} />
+    <div
+      class="background"
+      bind:this={background}
+      on:click={click}
+      transition:fade>
+      <div class="image">
+        <div class="overlay prev" on:click={prev}>
+          <span />
+        </div>
+        <Image alt={selected} data={data[selected]} />
+        <div class="overlay next" on:click={next}>
+          <span />
+        </div>
+      </div>
     </div>
   {/await}
 {/if}
