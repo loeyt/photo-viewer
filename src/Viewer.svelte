@@ -38,11 +38,16 @@
 
   function escape() {
     if (window.location.hash) {
+      let hash = window.location.hash;
       if (history.state && history.state.back) {
         history.back();
       } else {
         history.replaceState({ back: true }, "", window.location.pathname);
         selected = "";
+      }
+      let t = document.querySelector(`a[href="${hash}"]`);
+      if (t) {
+        t.focus();
       }
     }
   }
