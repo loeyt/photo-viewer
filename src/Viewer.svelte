@@ -66,7 +66,10 @@
 
   function hashchange() {
     selected = window.location.hash;
-    let t = document.querySelector(`a[href="${window.location.hash}"`);
+    let t = document.getElementById(window.location.hash);
+    if (!t) {
+      t = document.querySelector(`a[href="${window.location.hash}"]`);
+    }
     if (t) {
       t.scrollIntoView({
         behavior: "smooth",
