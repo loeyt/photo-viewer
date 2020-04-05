@@ -4,7 +4,7 @@
 
   $: sizes = Object.keys(data)
     .map(size => size.split("x").map(v => Number.parseInt(v, 10)))
-    .sort((first, second) => first[0] < second[0])
+    .sort((first, second) => second[0] - first[0])
     .map((size, n, sizes) => {
       const [width, height] = size;
       if (n == sizes.length - 1) {
