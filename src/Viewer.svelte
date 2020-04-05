@@ -26,6 +26,7 @@
           } else {
             history.pushState({ back: true }, "", href);
           }
+          t.blur();
           // These history invocations don't trigger hashchange, so we do here.
           hashchange();
         });
@@ -43,7 +44,7 @@
         history.back();
       } else {
         history.replaceState({ back: true }, "", window.location.pathname);
-        selected = "";
+        hashchange();
       }
       let t = document.querySelector(`a[href="${hash}"]`);
       if (t) {
@@ -71,16 +72,18 @@
 
   function hashchange() {
     selected = window.location.hash;
-    let t = document.getElementById(window.location.hash);
-    if (!t) {
-      t = document.querySelector(`a[href="${window.location.hash}"]`);
-    }
-    if (t) {
-      t.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "nearest"
-      });
+
+    if (window.location.hash) {
+      document.body.classList.add("photo-viewer");
+      let t = document.querySelector(`a[href="${window.location.hash}"]`);
+      if (t) {
+        t.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest"
+        });
+      }
+    } else {
+      document.body.classList.remove("photo-viewer");
     }
   }
 </script>
@@ -97,6 +100,10 @@
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
+  }
+
+  :global(body.photo-viewer) {
+    overflow: hidden;
   }
 </style>
 
