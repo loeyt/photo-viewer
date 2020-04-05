@@ -10,41 +10,45 @@
   import Image from "./Image.svelte";
   export let dataURL;
 
+  let links = [];
+
   let imageData = (async dataURL => {
     const response = await fetch(dataURL);
     const data = await response.json();
 
     // Now we know which links to highjack.
-    for (const t of document.links) {
+    links = Array.from(document.links).flatMap(t => {
       const href = t.getAttribute("href");
       if (href in data) {
         t.addEventListener("click", event => {
           event.preventDefault();
-          if (window.location.hash) {
-            // Navigation from image to image is not preserved in history.
-            history.replaceState({ back: true }, "", href);
-          } else {
-            history.pushState({ back: true }, "", href);
-          }
+          navigate(href);
           t.blur();
-          // These history invocations don't trigger hashchange, so we do here.
-          hashchange();
         });
+        return href;
       }
-    }
+    });
     return data;
   })(dataURL);
 
   let selected;
 
+  function navigate(url) {
+    if (selected) {
+      history.replaceState(history.state, "", url);
+    } else {
+      history.pushState({ back: true }, "", url);
+    }
+    hashchange();
+  }
+
   function escape() {
-    if (window.location.hash) {
-      let hash = window.location.hash;
+    if (selected) {
+      let hash = selected;
       if (history.state && history.state.back) {
         history.back();
       } else {
-        history.replaceState({ back: true }, "", window.location.pathname);
-        hashchange();
+        navigate(window.location.pathname);
       }
       let t = document.querySelector(`a[href="${hash}"]`);
       if (t) {
@@ -53,13 +57,40 @@
     }
   }
 
-  function keydown(event) {
-    if (event.key == "Escape") {
+  function prev() {
+    const current = links.indexOf(selected);
+    if (current < 1) {
       escape();
+    } else {
+      navigate(links[current - 1]);
     }
+  }
 
-    // TODO: ArrowLeft + ArrowDown for previous
-    // TODO: ArrowRight + ArrowUp for next
+  function next() {
+    const current = links.indexOf(selected);
+    if (current >= links.length - 1) {
+      escape();
+    } else {
+      navigate(links[current + 1]);
+    }
+  }
+
+  function keydown(event) {
+    if (selected) {
+      switch (event.key) {
+        case "Escape":
+          escape();
+          break;
+        case "ArrowLeft":
+        case "ArrowUp":
+          prev();
+          break;
+        case "ArrowRight":
+        case "ArrowDown":
+          next();
+          break;
+      }
+    }
   }
 
   let background;
@@ -73,9 +104,9 @@
   function hashchange() {
     selected = window.location.hash;
 
-    if (window.location.hash) {
+    if (selected) {
       document.body.classList.add("photo-viewer");
-      let t = document.querySelector(`a[href="${window.location.hash}"]`);
+      let t = document.querySelector(`a[href="${selected}"]`);
       if (t) {
         t.scrollIntoView({
           behavior: "smooth",
