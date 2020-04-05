@@ -82,11 +82,11 @@
           escape();
           break;
         case "ArrowLeft":
-        case "ArrowUp":
+        case "PageUp":
           prev();
           break;
         case "ArrowRight":
-        case "ArrowDown":
+        case "PageDown":
           next();
           break;
       }
