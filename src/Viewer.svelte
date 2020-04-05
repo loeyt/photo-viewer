@@ -164,7 +164,7 @@
   }
 
   .prev span {
-    left: 1%;
+    left: 12px;
   }
 
   .prev:hover span {
@@ -172,7 +172,7 @@
   }
 
   .next span {
-    right: 1%;
+    right: 12px;
   }
 
   .next:hover span {
