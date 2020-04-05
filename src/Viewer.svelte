@@ -27,14 +27,14 @@
             history.pushState({ back: true }, "", href);
           }
           // These history invocations don't trigger hashchange, so we do here.
-          selected = window.location.hash;
+          hashchange();
         });
       }
     }
     return data;
   })(dataURL);
 
-  let selected = window.location.hash;
+  let selected;
 
   function escape() {
     if (window.location.hash) {
@@ -63,6 +63,18 @@
       escape();
     }
   }
+
+  function hashchange() {
+    selected = window.location.hash;
+    let t = document.querySelector(`a[href="${window.location.hash}"`);
+    if (t) {
+      t.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "nearest"
+      });
+    }
+  }
 </script>
 
 <style>
@@ -81,9 +93,8 @@
 </style>
 
 <svelte:window
-  on:hashchange={() => {
-    selected = window.location.hash;
-  }}
+  on:load={hashchange}
+  on:hashchange={hashchange}
   on:keydown={keydown} />
 
 {#if selected}
