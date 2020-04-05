@@ -36,23 +36,33 @@
 
   let selected = window.location.hash;
 
+  function escape() {
+    if (window.location.hash) {
+      if (history.state && history.state.back) {
+        history.back();
+      } else {
+        history.replaceState({ back: true }, "", window.location.pathname);
+        selected = "";
+      }
+    }
+  }
+
   function keydown(event) {
     if (event.key == "Escape") {
-      if (window.location.hash) {
-        if (history.state && history.state.back) {
-          history.back();
-        } else {
-          history.replaceState({ back: true }, "", window.location.pathname);
-          selected = "";
-        }
-      }
+      escape();
     }
 
     // TODO: ArrowLeft + ArrowDown for previous
     // TODO: ArrowRight + ArrowUp for next
   }
 
-  // TODO: click listener for click on background
+  let background;
+
+  function click(event) {
+    if (event.target === background) {
+      escape();
+    }
+  }
 </script>
 
 <style>
@@ -78,10 +88,8 @@
 
 {#if selected}
   {#await imageData then data}
-    <div transition:fade>
-      <div class="current">
-        <Image alt={selected} data={data[selected]} />
-      </div>
+    <div bind:this={background} on:click={click} transition:fade>
+      <Image alt={selected} data={data[selected]} />
     </div>
   {/await}
 {/if}
